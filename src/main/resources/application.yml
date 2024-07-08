@@ -1,0 +1,14 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/petfriends
+        username: postgres
+        password: postgres
+    jpa:
+        database: POSTGRESQL
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+                show_sql: true
