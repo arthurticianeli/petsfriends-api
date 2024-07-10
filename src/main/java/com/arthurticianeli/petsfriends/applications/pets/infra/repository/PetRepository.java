@@ -8,6 +8,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public interface PetRepository extends JpaRepository<PetEntity, Long>, JpaSpecificationExecutor<PetEntity> {
 
     default Page<PetEntity> findAllPetsByFilterAndPagination(String name, String category, PetStatus status, Pageable pageable) {
@@ -17,4 +20,7 @@ public interface PetRepository extends JpaRepository<PetEntity, Long>, JpaSpecif
 
         return findAll(spec, pageable);
     }
+
+    List<PetEntity> findByCategoryId(Long id);
+
 }

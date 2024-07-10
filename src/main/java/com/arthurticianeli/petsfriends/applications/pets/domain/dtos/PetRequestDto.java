@@ -1,5 +1,6 @@
 package com.arthurticianeli.petsfriends.applications.pets.domain.dtos;
 
+import com.arthurticianeli.petsfriends.applications.category.domain.entities.CategoryEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,7 +11,7 @@ public record PetRequestDto(
         String name,
         String description,
         String urlImage,
-        String category,
+        CategoryEntity category,
         @NotNull
         LocalDateTime birthDate,
         @NotNull

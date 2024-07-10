@@ -1,5 +1,6 @@
 package com.arthurticianeli.petsfriends.applications.pets.domain.dtos;
 
+import com.arthurticianeli.petsfriends.applications.category.domain.entities.CategoryEntity;
 import com.arthurticianeli.petsfriends.applications.pets.domain.entities.PetEntity;
 import com.arthurticianeli.petsfriends.applications.pets.domain.enums.PetStatus;
 
@@ -10,7 +11,7 @@ public record PetResponseDto(
         String name,
         String description,
         String urlImage,
-        String category,
+        CategoryEntity category,
         LocalDateTime birthDate,
         Number age,
         PetStatus status
@@ -19,9 +20,9 @@ public record PetResponseDto(
         this(
                 pet.getId(),
                 pet.getName(),
-                pet.getDescription(),
-                pet.getUrlImage(),
-                pet.getCategory(),
+                pet.getDescription() != null ? pet.getDescription() : "",
+                pet.getUrlImage() != null ? pet.getUrlImage() : "",
+                pet.getCategory() != null ? pet.getCategory() : null,
                 pet.getBirthDate(),
                 pet.calculateAge(),
                 pet.getStatus());

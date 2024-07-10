@@ -1,5 +1,6 @@
 package com.arthurticianeli.petsfriends.applications.pets.domain.entities;
 
+import com.arthurticianeli.petsfriends.applications.category.domain.entities.CategoryEntity;
 import com.arthurticianeli.petsfriends.applications.pets.domain.dtos.PetRequestDto;
 import com.arthurticianeli.petsfriends.applications.pets.domain.enums.PetStatus;
 import jakarta.persistence.*;
@@ -30,14 +31,14 @@ public class PetEntity {
     private String description;
     @Column
     private String urlImage;
-    @Column
-    private String category;
-    @Column
+    @ManyToOne
+    private CategoryEntity category;
+    @Column(name = "birth_date")
     private LocalDateTime birthDate;
     @Column
     @Enumerated(EnumType.ORDINAL)
     private PetStatus status;
-    @Column
+    @Column(name = "created_at")
     @CreatedDate
     private LocalDateTime createdAt;
 
