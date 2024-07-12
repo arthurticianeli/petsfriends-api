@@ -1,4 +1,4 @@
-package com.arthurticianeli.petsfriends.applications.category;
+package com.arthurticianeli.petsfriends.applications.category.service;
 
 import com.arthurticianeli.petsfriends.applications.category.domain.dtos.CategoryRequestDto;
 import com.arthurticianeli.petsfriends.applications.category.domain.dtos.CategoryResponseDto;
@@ -54,23 +54,16 @@ public class CategoryServiceImpl implements ICategoryService {
     }
     @Override
     public Page<CategoryResponseDto> findAllCategoriesPaginated(Pageable pageable) {
-
         Page<CategoryEntity> categories = categoryRepository.findAll(pageable);
 
-        List<CategoryResponseDto> categoriesResponse = categories.map(CategoryResponseDto::new).toList();
-
-        return new PageImpl<>(
-                categoriesResponse,
-                pageable,
-                categories.getTotalElements()
-        );
-
+        return categories.map(CategoryResponseDto::new);
     }
 
     @Override
     @Transactional
     public List<CategoryResponseDto> getAllCategories() {
-        return CategoryResponseDto.from(categoryRepository.findAll());
+        List<CategoryEntity> all = categoryRepository.findAll();
+        return all.stream().map(CategoryResponseDto::new).toList();
     }
 
 }

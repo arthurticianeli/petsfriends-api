@@ -1,9 +1,9 @@
-package com.arthurticianeli.petsfriends.applications.authentication;
+package com.arthurticianeli.petsfriends.applications.authentication.controller;
 
 import com.arthurticianeli.petsfriends.applications.authentication.domain.dtos.CrendentialsRequestDto;
 import com.arthurticianeli.petsfriends.applications.authentication.domain.dtos.UserRequestDto;
 import com.arthurticianeli.petsfriends.applications.authentication.domain.entity.User;
-import com.arthurticianeli.petsfriends.applications.authentication.domain.services.UserService;
+import com.arthurticianeli.petsfriends.applications.authentication.domain.services.IUserService;
 import com.arthurticianeli.petsfriends.exceptions.DuplicatedTupleException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final IUserService userService;
 
     @PostMapping
     public ResponseEntity<?> saveUser(@RequestBody @Valid UserRequestDto userRequestDto) {

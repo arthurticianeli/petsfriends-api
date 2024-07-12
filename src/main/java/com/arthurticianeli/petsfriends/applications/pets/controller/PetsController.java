@@ -1,9 +1,10 @@
-package com.arthurticianeli.petsfriends.applications.pets;
+package com.arthurticianeli.petsfriends.applications.pets.controller;
 
 import com.arthurticianeli.petsfriends.applications.pets.domain.dtos.PetRequestDto;
 import com.arthurticianeli.petsfriends.applications.pets.domain.dtos.PetRequestFilterDto;
 import com.arthurticianeli.petsfriends.applications.pets.domain.dtos.PetResponseDto;
 import com.arthurticianeli.petsfriends.applications.pets.infra.repository.PetRepository;
+import com.arthurticianeli.petsfriends.applications.pets.service.PetServiceImpl;
 import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;

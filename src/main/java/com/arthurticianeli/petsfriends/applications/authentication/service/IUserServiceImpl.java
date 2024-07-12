@@ -1,10 +1,9 @@
-package com.arthurticianeli.petsfriends.applications.authentication;
+package com.arthurticianeli.petsfriends.applications.authentication.service;
 
 import com.arthurticianeli.petsfriends.applications.authentication.domain.AccessToken;
 import com.arthurticianeli.petsfriends.applications.authentication.domain.entity.User;
-import com.arthurticianeli.petsfriends.applications.authentication.domain.services.JwtService;
 import com.arthurticianeli.petsfriends.exceptions.DuplicatedTupleException;
-import com.arthurticianeli.petsfriends.applications.authentication.domain.services.UserService;
+import com.arthurticianeli.petsfriends.applications.authentication.domain.services.IUserService;
 import com.arthurticianeli.petsfriends.applications.authentication.infra.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class IUserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

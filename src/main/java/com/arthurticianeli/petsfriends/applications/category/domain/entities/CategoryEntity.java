@@ -17,7 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     @ManyToOne
     private CategoryEntity category;
@@ -27,6 +27,9 @@ public class CategoryEntity {
     }
 
     public CategoryEntity(CategoryRequestDto categoryRequestDto) {
+        if (categoryRequestDto.name() == null || categoryRequestDto.name().trim().isEmpty()) {
+            throw new IllegalArgumentException("Name is required");
+        }
         this.name = categoryRequestDto.name();
     }
 }

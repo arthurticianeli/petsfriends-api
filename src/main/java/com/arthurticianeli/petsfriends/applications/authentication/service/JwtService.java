@@ -1,4 +1,4 @@
-package com.arthurticianeli.petsfriends.applications.authentication.domain.services;
+package com.arthurticianeli.petsfriends.applications.authentication.service;
 
 import com.arthurticianeli.petsfriends.applications.authentication.domain.AccessToken;
 import com.arthurticianeli.petsfriends.applications.authentication.domain.SecretKeyGenerator;

@@ -11,8 +11,4 @@ public record CategoryResponseDto(
     public CategoryResponseDto(CategoryEntity save) {
         this(save.getId(), save.getName());
     }
-
-    public static List<CategoryResponseDto> from(List<CategoryEntity> all) {
-        return all.stream().map(CategoryResponseDto::new).toList();
-    }
 }

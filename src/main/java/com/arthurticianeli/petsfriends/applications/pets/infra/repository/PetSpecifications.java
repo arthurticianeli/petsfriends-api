@@ -1,5 +1,6 @@
 package com.arthurticianeli.petsfriends.applications.pets.infra.repository;
 
+import com.arthurticianeli.petsfriends.applications.category.domain.entities.CategoryEntity;
 import com.arthurticianeli.petsfriends.applications.pets.domain.entities.PetEntity;
 import com.arthurticianeli.petsfriends.applications.pets.domain.enums.PetStatus;
 import org.springframework.data.jpa.domain.Specification;
@@ -13,10 +14,10 @@ public class PetSpecifications {
         };
     }
 
-    public static Specification<PetEntity> categoryEquals(String category) {
+    public static Specification<PetEntity> categoryEquals(CategoryEntity category) {
         return (root, query, criteriaBuilder) -> {
-            if (category == null || category.isEmpty()) return null;
-            return criteriaBuilder.like(criteriaBuilder.lower(root.get("category")), "%" + category.toLowerCase() + "%");
+            if (category == null) return null;
+            return criteriaBuilder.equal(root.get("category"), category);
         };
     }
 

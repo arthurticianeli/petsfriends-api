@@ -1,6 +1,7 @@
 package com.arthurticianeli.petsfriends.applications.pets.domain.dtos;
 
 import com.arthurticianeli.petsfriends.applications.category.domain.entities.CategoryEntity;
+import com.arthurticianeli.petsfriends.applications.pets.domain.enums.PetStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -15,6 +16,6 @@ public record PetRequestDto(
         @NotNull
         LocalDateTime birthDate,
         @NotNull
-        String status
+        PetStatus status
 ) {
 }

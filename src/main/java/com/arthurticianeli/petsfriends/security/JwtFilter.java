@@ -1,8 +1,8 @@
 package com.arthurticianeli.petsfriends.security;
 
 import com.arthurticianeli.petsfriends.applications.authentication.domain.entity.User;
-import com.arthurticianeli.petsfriends.applications.authentication.domain.services.JwtService;
-import com.arthurticianeli.petsfriends.applications.authentication.domain.services.UserService;
+import com.arthurticianeli.petsfriends.applications.authentication.service.JwtService;
+import com.arthurticianeli.petsfriends.applications.authentication.domain.services.IUserService;
 import com.arthurticianeli.petsfriends.exceptions.InvalidTokenException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserService userService;
+    private final IUserService IUserService;
 
     @Override
     protected void doFilterInternal(
@@ -36,7 +36,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (token != null) {
             try {
                 String email = jwtService.getEmailFromToken(token);
-                var user = userService.getByEmail(email);
+                var user = IUserService.getByEmail(email);
                 setUserAsAuthenticated(user);
             }  catch (InvalidTokenException e) {
                 log.error("Invalid token: {}", e.getMessage());

@@ -1,7 +1,7 @@
 package com.arthurticianeli.petsfriends.security;
 
-import com.arthurticianeli.petsfriends.applications.authentication.domain.services.JwtService;
-import com.arthurticianeli.petsfriends.applications.authentication.domain.services.UserService;
+import com.arthurticianeli.petsfriends.applications.authentication.service.JwtService;
+import com.arthurticianeli.petsfriends.applications.authentication.domain.services.IUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,13 +15,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
-    public JwtFilter jwtFilter(JwtService jwtService, UserService userService) {
-        return new JwtFilter(jwtService, userService);
+    public JwtFilter jwtFilter(JwtService jwtService, IUserService IUserService) {
+        return new JwtFilter(jwtService, IUserService);
     }
 
     @Bean
@@ -45,6 +48,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
+        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
+
         UrlBasedCorsConfigurationSource cors = new UrlBasedCorsConfigurationSource();
         cors.registerCorsConfiguration("/**", config);
 

@@ -1,5 +1,8 @@
-package com.arthurticianeli.petsfriends.applications.pets;
+package com.arthurticianeli.petsfriends.applications.pets.service;
 
+import com.arthurticianeli.petsfriends.applications.category.domain.entities.CategoryEntity;
+import com.arthurticianeli.petsfriends.applications.category.infra.repository.CategoryRepository;
+import com.arthurticianeli.petsfriends.applications.category.service.CategoryServiceImpl;
 import com.arthurticianeli.petsfriends.applications.pets.domain.dtos.PetRequestDto;
 import com.arthurticianeli.petsfriends.applications.pets.domain.dtos.PetRequestFilterDto;
 import com.arthurticianeli.petsfriends.applications.pets.domain.dtos.PetResponseDto;
@@ -7,7 +10,6 @@ import com.arthurticianeli.petsfriends.applications.pets.domain.entities.PetEnti
 import com.arthurticianeli.petsfriends.applications.pets.domain.enums.PetStatus;
 import com.arthurticianeli.petsfriends.applications.pets.domain.service.IPetService;
 import com.arthurticianeli.petsfriends.applications.pets.infra.repository.PetRepository;
-import com.arthurticianeli.petsfriends.exceptions.DuplicatedTupleException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +26,9 @@ public class PetServiceImpl implements IPetService {
 
     @Autowired
     private final PetRepository petRepository;
+
+    @Autowired
+    private final CategoryRepository categoryRepository;
 
     @Transactional
     public PetResponseDto savePet(PetRequestDto petRequestDto) {
@@ -52,11 +57,14 @@ public class PetServiceImpl implements IPetService {
 
     @Override
     public Page<PetResponseDto> findAllPetsByFilterAndPagination(PetRequestFilterDto petRequestFilterDto, Pageable pageable) {
-
+        CategoryEntity category = null;
+        if(petRequestFilterDto.category() != null) {
+            category = categoryRepository.findByName(petRequestFilterDto.category());
+        }
         Page<PetEntity> pets = petRepository.findAllPetsByFilterAndPagination(
                 petRequestFilterDto.name(),
-                petRequestFilterDto.category(),
-                PetStatus.fromString(petRequestFilterDto.status()),
+                category,
+                petRequestFilterDto.status(),
                 pageable
         );
 

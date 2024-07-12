@@ -1,5 +1,6 @@
-package com.arthurticianeli.petsfriends.applications.category;
+package com.arthurticianeli.petsfriends.applications.category.controller;
 
+import com.arthurticianeli.petsfriends.applications.category.service.CategoryServiceImpl;
 import com.arthurticianeli.petsfriends.applications.category.domain.dtos.CategoryRequestDto;
 import com.arthurticianeli.petsfriends.applications.category.domain.dtos.CategoryResponseDto;
 import com.arthurticianeli.petsfriends.applications.category.infra.repository.CategoryRepository;
